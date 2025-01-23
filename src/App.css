@@ -1,0 +1,225 @@
+#map {
+    height: 485px;
+    width: 100%;
+}
+
+/*General styles*/
+.info-wrapper:last-of-type h2 {
+    margin-bottom: 0;
+}
+
+.title {
+    color: var(--light-gray);
+    font-size: .7rem;
+    letter-spacing: 1px;
+    margin-bottom: .5em;
+}
+
+.title ~ h2 {
+    font-size: 1.2rem;
+    margin-bottom: .85em;
+
+}
+
+.txt-caps {
+    text-transform: capitalize;
+}
+
+.txt-upper {
+    text-transform: uppercase;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+/*header styles*/
+.header {
+    --bgi-url: url('../public/images/pattern-bg-mobile.png');
+    --height: 300px;
+    background-image: var(--bgi-url);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: var(--height);
+    padding: 1.5em 1.45em;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 1.75rem;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: .75em;
+}
+
+.header:has(.err-warning) + .main .geo-info {
+    --top: -7em;
+}
+
+.header .form {
+    --width: min(100%, 500px);
+    display: flex;
+    width: var(--width);
+    margin: auto;
+}
+
+.form:has( > input:focus) {
+    outline: 2px solid -webkit-focus-ring-color;
+    border-radius: .85em;
+}
+
+.header form input {
+    font-size: 1.15rem;
+    font-weight: 500;
+    width: 100%;
+    padding: 0.75em .5em .75em 1.25em;
+    border-radius: .85em 0 0 .85em;
+    border: transparent;
+}
+
+.header form input:focus {
+    outline: transparent;
+}
+
+.header form input::placeholder {
+    color: var(--light-gray);
+    font-size: 1rem;
+}
+
+.header form button {
+    padding-inline: 1.45em;
+    border-radius: 0 .85em .85em 0;
+    outline: transparent;
+}
+
+.main {
+    position: relative;
+}
+
+.main .geo-info {
+    --width: min(88%, 625px);
+    --top: -8.85em;
+    position: absolute;
+    top: var(--top);
+    left: calc((100% - var(--width)) / 2);
+    z-index: 1000;
+    background-color: #fff;
+    width: var(--width);
+    text-align: center;
+    padding: 1.15em;
+    border-radius: .85em;
+    box-shadow: 0 0 4px var(--light-gray);
+    transition: 150ms top ease-in-out;
+}
+
+.main .current-link {
+    --bottom: 5em;
+    --right: 1.5em;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    background-color: transparent;
+    right: var(--right);
+    bottom: var(--bottom);
+    padding: .6em;
+    border: 3px solid var(--dark-gray);
+    border-radius: 50%;
+}
+
+.footer {
+    text-align: center;
+    font-size: .65rem;
+}
+
+.err-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    text-align: center;
+    padding: 1em;
+    position: absolute;
+    background-color: rgba(252, 252, 252, 0.05);
+    z-index: 1000;
+    inset: 0;
+}
+
+.err-info > svg {
+    font-size: 5rem;
+    margin-bottom: .25em;
+}
+
+.err-info > p {
+    margin-bottom: .5em;
+}
+
+.err-info a {
+    display: flex;
+    align-items: center;
+    gap: .35em;
+    margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 1024px) {
+    .title {
+        margin-bottom: .5em;
+    }
+
+    .title ~ h2 {
+        margin-bottom: 0;
+    }
+
+    .header {
+        --bgi-url: url('../public/images/pattern-bg-desktop.png');
+        --height: 225px;
+    }
+
+    .header:has(.err-warning) + .main .geo-info {
+        --top: -1.5em;
+    }
+
+    .main .geo-info {
+        --width: 80%;
+        --top: -3em;
+        display: grid;
+        padding: 1.85em 2em;
+        grid-template-columns: repeat(4, minmax(50px, 1fr));
+        place-items: center;
+        text-align: left;
+
+    }
+
+    .main .geo-info div {
+        width: 100%;
+        padding-inline-start: 1.55em;
+        height: 100%;
+        border-right: 2px solid var(--light-gray);
+    }
+
+    .main .geo-info div.info-wrapper--skeleton {
+        padding-right: 1.55em;
+    }
+    .main .geo-info div.info-wrapper--skeleton:last-child {
+        padding-right: 0;
+    }
+
+    .main .geo-info > div:first-child {
+        padding-inline-start: 0;
+
+    }
+
+    .main .geo-info > div:last-child {
+        border-right: none;
+    }
+
+    .main .current-link {
+        --bottom: 9em;
+        --right: 2em;
+    }
+}
