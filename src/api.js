@@ -1,19 +1,18 @@
 import {domainRgx, ipv4Rgx} from "./utils.js";
 
 export default async function getIPGeolocationData(apiKey, param) {
-    let paramKey = '';
+    let baseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}`;
     if (param) {
-        if (ipv4Rgx.test(param)) {
-            paramKey = 'ipAddress';
-        } else if (domainRgx.test(param)) {
-            paramKey = 'domain';
+        if (param.match(ipv4Rgx)) {
+            baseUrl = baseUrl.concat(`&&ipAddress=`, param);
+        } else if (param.match(domainRgx)) {
             const match = param.match(domainRgx);
+            baseUrl = baseUrl.concat('&&domain=', match[0])
             param = match[0];
         }
     }
-    const baseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}`
-    const url = param ? baseUrl.concat(`&${paramKey}=`, param) : baseUrl;
-    const response = await fetch(url);
+
+    const response = await fetch(baseUrl);
     if (!response.ok) {
         throw {
             status: response.status,
