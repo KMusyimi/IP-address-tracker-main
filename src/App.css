@@ -1,5 +1,6 @@
+
 #map {
-    height: 485px;
+    height: calc(100dvh - 300px);
     width: 100%;
 }
 
@@ -40,11 +41,11 @@
 /*header styles*/
 .header {
     --bgi-url: url('../public/images/pattern-bg-mobile.png');
-    --height: 300px;
+    --header-height: 300px;
     background-image: var(--bgi-url);
     background-size: cover;
     background-repeat: no-repeat;
-    height: var(--height);
+    height: var(--header-height);
     padding: 1.5em 1.45em;
     text-align: center;
 }
@@ -167,6 +168,9 @@
 }
 
 @media only screen and (min-width: 1024px) {
+    #map{
+        height: calc(100dvh - 225px);
+    }
     .title {
         margin-bottom: .5em;
     }
@@ -177,7 +181,7 @@
 
     .header {
         --bgi-url: url('../public/images/pattern-bg-desktop.png');
-        --height: 225px;
+        --header-height: 225px;
     }
 
     .header:has(.err-warning) + .main .geo-info {
