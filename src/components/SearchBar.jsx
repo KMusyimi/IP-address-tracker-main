@@ -1,41 +1,29 @@
 import {Form, useSearchParams} from "react-router-dom";
-import iconArrow from '../../public/images/icon-arrow.svg'
-import {useRef, useState} from "react";
-import checkValid from "../utils.js";
+import iconArrow from '../../images/icon-arrow.svg'
+import {useEffect, useRef, useState} from "react";
 
 
 export default function SearchBar() {
     const inputRef = useRef(null);
-    const [, setSearchParams] = useSearchParams();
+    const [messageParam, setMessageParam] = useSearchParams();
     const [valid, setValid] = useState(true);
-
+    const message = messageParam.get('message');
     const invalidStyles = {
         backgroundColor: 'rgb(255, 116, 139)',
         color: 'rgb(247, 44, 91)',
         outline: '2px solid rgb(247, 44, 91)',
         borderRadius: '.85em'
     }
-
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        const inputValue = inputRef.current.value.trim();
-        const valid = checkValid(inputValue);
-        valid ?
-            setSearchParams((prevParams) => {
-                prevParams.set('search_query', inputValue);
-                return prevParams;
-            }) : setValid(false);
-    }
-
+    useEffect(() => {
+        message && setValid(false);
+    }, [message])
     return (
         <>
             {!valid && <p className={'err-warning'}
-                          style={{color: 'rgb(247, 44, 91)', fontSize: '.885rem', marginBottom: '.35em'}}>Invalid IP
-                address or domain...</p>}
+                          style={{color: 'rgb(247, 44, 91)', fontSize: '.885rem', marginBottom: '.35em'}}>{message}</p>}
             <Form className={'form'}
                   style={!valid ? invalidStyles : {}}
-                  onSubmit={handleSubmit} method={'get'}>
+                  method={'get'}>
                 <input
                     id='search-input'
                     className={'search-bar'}
